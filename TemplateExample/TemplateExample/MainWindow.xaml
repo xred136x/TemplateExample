@@ -1,0 +1,81 @@
+﻿<Window x:Class="TemplateExample.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TemplateExample"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800" >
+    
+    <Window.Resources>
+        <ControlTemplate TargetType="Button" x:Key="btn1Template" x:Name="Template001" >
+            <Border x:Name ="border001" Background="IndianRed" 
+                    CornerRadius="50" BorderBrush="Black" BorderThickness="3" Height="100" Width="200"
+                    />
+            
+        </ControlTemplate>
+        <ControlTemplate TargetType="Button" x:Key="btn2Template" x:Name="Template002" >
+            <Ellipse Height="100" Width="200" Fill="RosyBrown"
+                    />
+            
+        </ControlTemplate>
+        <ControlTemplate TargetType="Button" x:Key="btn3Template" x:Name="Template003">
+            <StackPanel>
+                <TextBlock x:Name="textBlock1"
+                           Text="Кнопка" />
+                <CheckBox x:Name="checkBox1" />
+            </StackPanel>
+        </ControlTemplate>
+        <Style TargetType="Button" x:Key="FirstStyle">
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="FontSize" Value="30"/>
+                    <Setter Property="FontWeight" Value="Bold"/>
+                    <Setter Property="Foreground" Value="DarkRed" />
+                    <Setter Property="Background" Value="Yellow" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <ControlTemplate TargetType="Button" x:Key="btn4Template" x:Name="Template004">
+            <Grid Background="{TemplateBinding Background}" x:Name="myGrid">
+                <TextBlock Text="{TemplateBinding Content}" 
+                           VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            </Grid>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="TextBlock.FontSize" Value="20" />
+                    <Setter Property="TextBlock.FontFamily" Value="Arial" />
+                    <Setter Property="Grid.Background" Value="Orange" />
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+        <ControlTemplate  TargetType="Window" x:Key="wind1Template" x:Name="Template005" >
+            <Ellipse Height="{TemplateBinding Height}" Width="{TemplateBinding Width}"/>
+        </ControlTemplate>
+        
+        
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Button x:Name="myButton001" Template="{StaticResource btn1Template}" Grid.Column="0" Grid.Row ="0"
+                Click="myButton_Click"/>
+        <!-- Height="100" Width="200"-->
+        <Button x:Name="myButton002" Grid.Column="1" Grid.Row ="2"
+                Template="{StaticResource btn2Template}"
+                Click="myButton_Click"/>
+        <Button x:Name="myButton003" Grid.Column="0" Grid.Row ="1"
+                Content="First" Style="{StaticResource FirstStyle}"
+                Click="myButton_Click"/>
+        <Button x:Name="myButton004" Grid.Column="1" Grid.Row ="1"
+                Content="Second" Template="{StaticResource btn4Template}"
+                Click ="myButton_Click002" />
+    </Grid>
+</Window>
